@@ -156,3 +156,65 @@ The maturity level of a published technical report indicates its place in the Re
 - [accessibility](https://developers.google.com/web/fundamentals/accessibility/semantics-aria?hl=zh-cn)
 - [2021/10/w3c-highlights](https://www.w3.org/2021/10/w3c-highlights/Overview.html)
 - [REC-html-aria-20211209](https://www.w3.org/TR/2021/REC-html-aria-20211209/)
+
+## Indexed Database API 3.0
+
+[Web 应用工作组](https://www.w3.org/2019/webapps/) 在 20211006 发布了第一个 working draft，2.0 的 Recommendation 版本是在 20180130， 1.0 的 Recommendation 版本是在 20150108。
+
+### Indexed Database 是什么
+
+IndexedDB 是一种可以让你在用户的浏览器内持久化存储数据的方法。IndexedDB 为生成 Web Application 提供了丰富的查询能力，使我们的应用在在线和离线时都可以正常工作，尤其是支持存储大容量的数据。
+
+IndexedDB 和 Web SQL Database 都是本地数据库数据存储，Web SQL Database 数据库要出来的更早，然而，2010 年 11 月 18 日 W3C 宣布舍弃 Web SQL database 草案。
+
+### 兼容性
+
+可以看到 index db2.0 基本都是支持的。
+![http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/index-db.png]
+
+### Indexed Database 特性
+
+- key/value 的存储方式：IndexedDB 和 localStorage 的存储方式很类似，都是通过一个 key 对应一个 value，而且 key 是唯一的方式进行存储的，但是 indexedDB 和 localStorage 有很不一样的一点，就是可以直接存储对象数组等，不需要想 localStorage 那样必须转为字符串。
+- 异步调用：IndexedDB 是使用异步调用的，当我们存储一个较大的数据时，不会因为写入数据慢而导致页面阻塞。
+- 支持事务：IndexedDB 支持事务，如果有用过 mysql 和 mongoDB 的人就很清楚了，能确保我们多个操作只要其中一步出现问题，可以整体回滚。
+- 同源限制：IndexedDB 和 localStorage 一样，都是有同源策略的问题，不能跨协议、端口、域名使用。
+- 支持二进制：IndexedDB 不但可以存储对象，字符串等，还可以存储二进制数据。
+- 储存空间：IndexedDB 存储空间相比 localStorage 要大得多。
+
+### Indexed Database 3.0 的修订历史
+
+以下是 2.0 规范后更改的信息摘要。完整的修订历史可以在[这里](https://github.com/w3c/IndexedDB/)找到。有关第一版的修订历史，请参阅该文档的[修订历史](https://www.w3.org/TR/2015/REC-IndexedDB-20150108/#revision-history)。有关第二版的修订历史，请参阅该文档的[修订历史](https://www.w3.org/TR/IndexedDB-2/#revision-history)。
+
+- 清理[索引数据库事务的算法](https://www.w3.org/TR/IndexedDB/#cleanup-indexed-database-transactions)([PR#232](https://github.com/w3c/IndexedDB/pull/232)）
+
+- [更新了部分接口定义](https://www.w3.org/TR/IndexedDB/#global-scope)([PR #238](https://github.com/w3c/IndexedDB/pull/238))
+
+- 添加了[databases()](https://www.w3.org/TR/IndexedDB/#dom-idbfactory-databases)方法([Issue #31](https://github.com/w3c/IndexedDB/issues/31))
+
+- 添加了 [commit()](https://www.w3.org/TR/IndexedDB/#dom-idbtransaction-commit)方法([Issue #234](https://github.com/w3c/IndexedDB/issues/234)）
+
+- 添加了 [request](https://www.w3.org/TR/IndexedDB/#dom-idbcursor-request) 属性([Issue #255](https://github.com/w3c/IndexedDB/issues/255)）
+
+- 删除了 lastModifiedDate 对 [File](https://w3c.github.io/FileAPI/#dfn-file) 对象的非标准属性的处理([Issue #215](https://github.com/w3c/IndexedDB/issues/215)）
+
+- 删除[includes()](https://www.w3.org/TR/IndexedDB/#dom-idbkeyrange-includes)方法([Issue #294](https://github.com/w3c/IndexedDB/issues/294)）
+- 将数组键转换为[数组奇异对象](https://tc39.github.io/ecma262/#array-exotic-objects)(如代理)([Issue #309](https://github.com/w3c/IndexedDB/issues/309)）
+
+- 在克隆操作期间，事务现在暂时处于非活动状态。
+
+- 添加了 [durability](https://www.w3.org/TR/IndexedDB/#dom-idbtransactionoptions-durability) 选项和 [durability](https://www.w3.org/TR/IndexedDB/#dom-idbtransaction-durability) 属性([Issue #50](https://github.com/w3c/IndexedDB/issues/50)）
+
+- 在[§ 2.7.2 Transaction scheduling](https://www.w3.org/TR/IndexedDB/#transaction-scheduling)添加更细致的说明，并在运行具有重叠范围的只读事务时禁止启动读/写事务([Issue #253](https://github.com/w3c/IndexedDB/issues/253)）
+
+- 添加了[可访问性注意事项](https://www.w3.org/TR/IndexedDB/#accessibility)([Issue #327](https://github.com/w3c/IndexedDB/issues/327)）
+
+- 使用[infra](https://www.w3.org/TR/IndexedDB/#biblio-infra)的列表排序定义([Issue #346](https://github.com/w3c/IndexedDB/issues/346)）
+
+### 参考文档
+
+- [REC-IndexedDB-20150108/](https://www.w3.org/TR/2015/REC-IndexedDB-20150108/)
+- [REC-IndexedDB-2-20180130](https://www.w3.org/TR/2018/REC-IndexedDB-2-20180130/)
+- [infra](https://infra.spec.whatwg.org/)
+- [IndexedDB_API/Basic_Terminology](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Terminology)
+- [html5-indexeddb-js-example](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
+- [新一代的前端存储方案--indexedDB](https://juejin.cn/post/6844903613240705038)
