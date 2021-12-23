@@ -159,7 +159,7 @@ The maturity level of a published technical report indicates its place in the Re
 
 ## Indexed Database API 3.0
 
-[Web 应用工作组](https://www.w3.org/2019/webapps/) 在 20211006 发布了第一个 working draft，2.0 的 Recommendation 版本是在 20180130， 1.0 的 Recommendation 版本是在 20150108。
+[Web 应用工作组](https://www.w3.org/2019/webapps/) 在 20210311 发布了第一个 working draft，2.0 的 Recommendation 版本是在 20180130， 1.0 的 Recommendation 版本是在 20150108。
 
 ### Indexed Database 是什么
 
@@ -210,11 +210,88 @@ IndexedDB 和 Web SQL Database 都是本地数据库数据存储，Web SQL Datab
 
 - 使用[infra](https://www.w3.org/TR/IndexedDB/#biblio-infra)的列表排序定义([Issue #346](https://github.com/w3c/IndexedDB/issues/346)）
 
+### 发布历史
+
+```
+2021-10-06	Working Draft
+2021-06-18	Working Draft
+2021-03-11	First Public Working Draft
+```
+
 ### 参考文档
 
 - [REC-IndexedDB-20150108/](https://www.w3.org/TR/2015/REC-IndexedDB-20150108/)
 - [REC-IndexedDB-2-20180130](https://www.w3.org/TR/2018/REC-IndexedDB-2-20180130/)
+- [history/IndexedDB-3](https://www.w3.org/standards/history/IndexedDB-3)
 - [infra](https://infra.spec.whatwg.org/)
 - [IndexedDB_API/Basic_Terminology](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Terminology)
 - [html5-indexeddb-js-example](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
 - [新一代的前端存储方案--indexedDB](https://juejin.cn/post/6844903613240705038)
+
+## PWA
+
+This is Diego from the Microsoft Edge Team working on PWAs.
+
+### Edge 团队在 PWA 上的进展
+
+桌面 PWA 具有大量可能的功能——响应式设计、操作系统主题支持、自定义标题栏、快捷方式、从应用程序共享、共享到应用程序、处理方案、链接、文件以及对文件系统本身的访问。还有徽章和推送通知，但它们已被很好地涵盖，不会包含在本次演讲中。
+
+#### 安装方式
+
+1）通过浏览器安装
+支持 PWA 的现代浏览器在打开 PWA 网站时，在地址栏会出现安装按钮，点击即可安装。
+![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/pwa-install-browser.png)
+安装完后就像普通的桌面程序一样，通过 Lanuchpad(mac 系统)就可以查找到了。
+2）从 PWA 应用商店安装
+目前 Windows 10 系统内置的 Microsoft Store 应用商店已经内置了很多 PWA 应用，当然还有其他很多 PWA 应用商店，如：
+[appsco](https://appsco.pe/)、[pwastart](https://appstore.pwastart.com/)。
+
+此外，通过 [PWABuilder](https://www.pwabuilder.com/)可以将 PWA 应用上传到 ios app store 或其他 PWA Builder process 上传到对应的 store。
+
+And today, I'm gonna share with you a demo that showcases how the features that we're working on allow your installed web app to integrate with the desktop operating system, be it Windows, Linux, or even Mac OS. So, the first thing that we need to know is how to acquire the PWA.
+
+#### PWA 具有的功能
+
+- 响应式的设计和主题
+  拖动改变窗口大小时 layout 可以动态的调整，此外改变系统主题，ui 也会跟着变化，这使得 PWA 与和本地操作系统结合得更紧密。
+
+- 可以自定义窗口控制层(名称、关闭按钮、最小化、最大化等)
+  窗口的各种状态也是会记住的，关闭 PWA 再打开会是上次打开的状态，比如改变了窗口大小、隐藏了保存、分享等按钮下次打开时还是之前的状态，这对用户更友好。
+
+- 快捷图标
+  快捷图标是在 manifest 文件中定义的。
+
+- 分享
+
+  1. 可以实现直接分享整个 PWA app
+  2. 分享 link
+     ![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/share-link.png)
+  3. 分享不仅可以从 PWA 开始，还可以让 PWA 作为分享的目标
+     ![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/share-to-pwa.png)
+
+  分享通过本地的操作系统进行的。
+
+- [自定义 schemes 或预定义 schemes](https://diek.us/pwinter/pwa-palette.html)
+
+  ```json
+  //manifest.json
+  {
+    "protocol_handlers": [
+      {
+        "protocol": "web+pwinter",
+        "url": "index.html?colors=%s"
+      }
+    ]
+  }
+  ```
+
+  ![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/custom-protocol.png)
+
+- file system access API
+
+### 参考文档
+
+- [Progressive_web_apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+- [progressive-web-apps](https://web.dev/progressive-web-apps/)
+- [code-21-big-stonking-post](https://weblog.200ok.com.au/2021/09/code-21-big-stonking-post.html)
+- [publish-your-pwa-to-the-ios-app-store/](https://blog.pwabuilder.com/posts/publish-your-pwa-to-the-ios-app-store/)
