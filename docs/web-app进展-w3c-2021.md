@@ -2,7 +2,7 @@
 
 ## ARIA
 
-ARIA 是 Accessible Rich Internet Applications 的缩写，它是 W3C 的[Web 无障碍推进组织(Web Accessibility Initiative / WAI)](http://www.w3.org/WAI/)在 2014 年 3 月 20 日发布的[可访问富互联网应用实现指南](http://www.w3.org/TR/2014/REC-wai-aria-20140320/)。
+ARIA 是 Accessible Rich Internet Applications 的缩写，它是 W3C 的[Web 无障碍推进组织(Web Accessibility Initiative / WAI)](http://www.w3.org/WAI/)在 2014 年 3 月 20 日发布的[可访问互联网应用实现指南](http://www.w3.org/TR/2014/REC-wai-aria-20140320/)。
 
 WAI-ARIA 是一个为残疾人士等提供无障碍访问动态、可交互 Web 内容的技术规范。在 WAI-ARIA 概述中对 WAI-ARIA 及其他支持文档进行了介绍，主要包括以下内容：
 
@@ -110,9 +110,34 @@ ARIA 在 HTML 中的使用有一些规则：
 
 The maturity level of a published technical report indicates its place in the Recommendation Track process. The maturity levels "Working Draft" and "Working Group Note" represent the possible initial states of a technical report in the Recommendation Track process. The maturity levels "Recommendation", "Working Group Note", and "Rescinded Recommendation" represent the possible end states.
 
+- First Public Working Draft
+
+Announcement: The Director must announce the first Working Draft publication to other W3C groups and to the public.
+
+Purpose: The publication of the First Public Working Draft is a signal to the community to begin reviewing the document. See section 4.1 of the W3C Patent Policy [PUB33] for information about the policy implications of the First Public Working Draft.
+
+Entrance criteria: The Chair must record the group's decision to request advancement. Since this is the first time that a document with this short name appears in the Technical Reports index, Director approval is required for the transition.
+
+Ongoing work: After publication of the First Public Working Draft, the Working Group generally revises the technical report (see the Working Group "Heartbeat" Requirement) in accordance with its charter.
+
+In order to make Working Drafts available to a wide audience early in their development, the requirements for publication of a Working Draft are limited to an agreement by a chartered Working Group to publish the technical report and satisfaction of the Team's Publication Rules [PUB31]. Consensus is not a prerequisite for approval to publish; the Working Group may request publication of a Working Draft even if it is unstable and does not meet all Working Group requirements.
+
+Working Groups should encourage early and wide review of the technical report, within and outside of W3C, especially from other Working Groups with dependencies on the technical report. Advisory Committee representatives should encourage review within their organizations as early as First Public Working Draft, i.e., before a Last Call announcement and well before a Call for Review of a Proposed Recommendation.
+
+The Working Group should be responsive to and facilitate ongoing review by addressing issues in a timely manner and clearly indicating changes between drafts (e.g., by providing "diffs" and summaries of substantive changes).
+
+Possible next steps:
+
+Forward: Last Call announcement, generally done after a series of Working Drafts.
+Otherwise: end work
+
 - Working Draft (WD)
 
   A Working Draft is a document that W3C has published for review by the community, including W3C Members, the public, and other technical organizations(the group that is developing it).
+
+- Candidate Recommendation Snapshot
+
+  which is supposedly the final output (even though you can never really finish).
 
 - Candidate Recommendation (CR)
 
@@ -230,11 +255,196 @@ IndexedDB 和 Web SQL Database 都是本地数据库数据存储，Web SQL Datab
 
 ## PWA
 
-This is Diego from the Microsoft Edge Team working on PWAs.
-
 ### Edge 团队在 PWA 上的进展
 
+This is Diego from the Microsoft Edge Team working on PWAs.
+
 桌面 PWA 具有大量可能的功能——响应式设计、操作系统主题支持、自定义标题栏、快捷方式、从应用程序共享、共享到应用程序、处理方案、链接、文件以及对文件系统本身的访问。还有徽章和推送通知，但它们已被很好地涵盖，不会包含在本次演讲中。
+
+### 什么是 PWA
+
+Google 在 2015 年开始着手推广像小程序这种无需下载的应用，被命名为 PWA（Progressive Web Apps，渐进式。渐进式 Web 应用会在桌面和移动设备上提供可安装的、仿原生应用的体验，可直接通过 Web 进行构建和交付。它们是快速、可靠的 Web 应用。具有如下特点：
+
+- 渐进式
+
+  适用于选用任何浏览器的所有用户，因为它是以渐进式增强作为核心宗旨来开发的。
+
+- 自适应
+
+  适合任何机型：桌面设备、移动设备、平板电脑或任何未来设备。
+
+- 连接无关性
+
+  能够借助于服务工作线程在离线或低质量网络状况下工作。
+
+- 类似应用
+
+  由于是在 AppShell 模型基础上开发，因此具有应用风格的交互和导航，给用户以应用般的熟悉感。
+
+- 持续更新
+
+  在服务工作线程更新进程的作用下时刻保持最新状态。
+
+- 安全
+
+  通过 HTTPS 提供，以防止窥探和确保内容不被篡改。
+
+- 可发现
+
+  W3C 清单和服务工作线程注册作用域能够让搜索引擎找到它们，从而将其识别为"应用”
+
+- 可再互动
+
+  通过推送通知之类的功能简化了再互动。
+
+- 可安装
+
+  用户可免去使用应用商店的麻烦，直接将对其最有用的应用“保留"在主屏幕上。
+
+- 可链接
+
+  可通过网址轻松分享，无需复杂的安装。
+
+### 生成 Progressive Web App 步骤
+
+#### 开启 HTTPS
+
+由于一些显而易见的原因，PWAs 需要 HTTPS 连接。
+当然，HTTPS 在开发环境代码中并不是必须的，因为 Chrome 允许使用 localhost 或者任何 127.x.x.x 的地址来测试。你也可以在 HTTP 连接下测试你的 PWA，你需要使用 Chrome ，并且输入以下命令行参数：
+
+```
+--user-data-dir
+--unsafety-treat-insecure-origin-as-secure
+```
+
+#### 创建 Web App Manifest
+
+manifest ，即应用程序清单，它提供有关应用程序的信息，例如 name，description 和需要在主屏使用的图标的图片，启动屏的图片等。
+manifest 文件是一个 JSON 格式的文件，位于你项目的根目录。它必须用 `Content-Type: application/manifest+json` 或者 `Content-Type: application/json` 这样的 HTTP 头来请求。这个文件可以被命名为任何名字，在示例代码中他被命名为 `/manifest.json`。
+
+```json
+{
+  "name": "Progress web application",
+  "short_name": "PWA Demo",
+  "description": "PWA Demo",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icons/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+```
+
+在页面的`<head>`中引入：
+
+```html
+<link rel="manifest" href="/manifest.json" />
+```
+
+manifest 中主要属性有：
+
+- name —— 网页显示给用户的完整名称
+- short_name —— 当空间不足以显示全名时的网站缩写名称
+- description —— 关于网站的详细描述
+- start_url —— 网页的初始 相对 URL（比如 /）
+- scope —— 导航范围。比如，/app/的 scope 就限制 app 在这个文件夹里。
+- background-color —— 启动屏和浏览器的背景颜色
+- theme_color —— 网站的主题颜色，一般都与背景颜色相同，它可以影响网站的显示
+- orientation —— 首选的显示方向：any, natural, landscape, landscape-primary, landscape-secondary, portrait, portrait-primary, 和 portrait-secondary。
+- display —— 首选的显示方式：fullscreen, standalone(看起来像是 native app)，minimal-ui(有简化的浏览器控制选项) 和 browser(常规的浏览器 tab)
+- icons —— 定义了 src URL, sizes 和 type 的图片对象数组。
+
+MDN 提供了完整的 manifest 属性列表:[Web App Manifest properties](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+
+#### 创建一个 Service Worker
+
+Service worker 实际上是一段脚本，在后台运行。作为一个独立的线程，运行环境与普通脚本不同，所以不能直接参与 Web 交互行为。Service Worker 的出现是正是为了使得 Web App 也可以做到像 Native App 那样可以离线使用、消息推送的功能。
+我们可以把 Service worker 当做是一种客户端代理,能够拦截进出的 HTTP 请求，从而完全控制你的网站。
+![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/service-worker.png)
+
+Service Worker 实现缓存功能一般分为三个步骤：首先需要先注册 Service Worker，然后监听到 install 事件以后就可以缓存需要的文件，那么在下次用户访问的时候就可以通过拦截请求的方式查询是否存在缓存，存在缓存的话就可以直接读取缓存文件，否则就去请求数据。
+注册 service worker：
+
+```js
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("service-worker.js")
+    .then(function (registration) {
+      // 注册成功
+      console.log(
+        "ServiceWorker registration successful with scope: ",
+        registration.scope
+      );
+    })
+    .catch(function (err) {
+      // 注册失败
+      console.log("ServiceWorker registration failed: ", err);
+    });
+}
+```
+
+service worker 主要有三个事件： install，activate 和 fetch。
+
+- install
+
+```js
+//sw.js
+var CACHE_NAME = "v1";
+var urlsToCache = ["icons/logo-512.png"];
+
+self.addEventListener("install", function (event) {
+  //Perform install steps
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+```
+
+- activate
+
+```js
+//sw.js
+
+// clear old caches
+function clearOldCaches() {
+  return caches.keys().then((keylist) => {
+    return Promise.all(
+      keylist
+        .filter((key) => key !== CACHE_NAME)
+        .map((key) => caches.delete(key))
+    );
+  });
+}
+self.addEventListener("activate", (event) => {
+  // delete old caches
+  event.waitUntil(clearOldCaches().then(() => self.clients.claim()));
+});
+```
+
+- fetch
+
+```js
+//sw.js
+self.addEventListener("fetch", function (event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      // Cache hit - return response
+      if (response) {
+        return response;
+      }
+      return fetch(event.request);
+    })
+  );
+});
+```
 
 #### 安装方式
 
@@ -291,7 +501,18 @@ And today, I'm gonna share with you a demo that showcases how the features that 
 
 ### 参考文档
 
+- [pwa](https://www.w3.org/2021/10/TPAC/demos/pwa.html)
 - [Progressive_web_apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 - [progressive-web-apps](https://web.dev/progressive-web-apps/)
 - [code-21-big-stonking-post](https://weblog.200ok.com.au/2021/09/code-21-big-stonking-post.html)
 - [publish-your-pwa-to-the-ios-app-store/](https://blog.pwabuilder.com/posts/publish-your-pwa-to-the-ios-app-store/)
+- [add-manifest](https://web.dev/add-manifest/)
+- [Cache](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
+- [service-workers](https://developers.google.com/web/fundamentals/primers/service-workers)
+- [有哪些使用 PWA 的 app](https://www.zhihu.com/question/59108831)
+- [讲讲 PWA](https://segmentfault.com/a/1190000012353473)
+- [pwa-book](https://lavas-project.github.io/pwa-book/)
+- [Manifest](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
+  https://web.dev/manifest-updates/
+  https://solidstudio.io/blog/pwa-refreshing-application
+  https://web.dev/learn/pwa/

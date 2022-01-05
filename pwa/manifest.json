@@ -1,0 +1,16 @@
+{
+  "name": "Progress web application",
+  "short_name": "PWA Demo",
+  "description": "PWA Demo",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#fffffa",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icons/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
