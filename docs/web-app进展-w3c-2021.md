@@ -4,7 +4,7 @@
 
 ARIA 是 Accessible Rich Internet Applications 的缩写，它是 W3C 的[Web 无障碍推进组织(Web Accessibility Initiative / WAI)](http://www.w3.org/WAI/)在 2014 年 3 月 20 日发布的[可访问互联网应用实现指南](http://www.w3.org/TR/2014/REC-wai-aria-20140320/)。
 
-WAI-ARIA 是一个为残疾人士等提供无障碍访问动态、可交互 Web 内容的技术规范。在 WAI-ARIA 概述中对 WAI-ARIA 及其他支持文档进行了介绍，主要包括以下内容：
+WAI-ARIA 是一个为残疾人士提供无障碍访问动态、可交互 Web 内容的技术规范。在 WAI-ARIA 概述中对 WAI-ARIA 及其他支持文档进行了介绍，主要包括以下内容：
 
 - ARIA 是 W3C 的一个独立规范，帮助 Web 应用程序和 Web 页面变得更具可访问性
 
@@ -34,7 +34,7 @@ WAI-ARIA 是一个为残疾人士等提供无障碍访问动态、可交互 Web 
 
 ### 如何使用 ARIA
 
-应用于 HTML 的 ARIA 有两部分组成：**role**（角色）和带**aria-**前缀的属性，其作用：
+应用于 HTML 的 ARIA 有两部分组成：**role**（角色）和带 aria-前缀的属性，其作用：
 
 - role(角色)标识了一个元素的作用
 - aria-属性描述了与之有关的事物（特征）及其是什么样的（状态）
@@ -52,9 +52,9 @@ WAI-ARIA 是一个为残疾人士等提供无障碍访问动态、可交互 Web 
 
 在 mac 上通过 Voice Over(cmd+f5)就可以识别上述的进度条，朗读出：
 
-> web content; 50%, progress indicator
+> web content; 75%, progress indicator
 
-这样就可以让视力障碍着能够知道当前的网页内容是一个进度条，进度到了 50%。
+这样就可以让视力障碍着能够知道当前的网页内容是一个进度条，进度到了 75%。
 如果不用 ARIA 是什么效果呢，下面是通过普通 div+css 实现的简单的 progress bar：
 
 ```html
@@ -108,28 +108,11 @@ ARIA 在 HTML 中的使用有一些规则：
 
 ### [Recommendation Track Process Maturity Levels](https://www.w3.org/2004/02/Process-20040205/tr.html)
 
-The maturity level of a published technical report indicates its place in the Recommendation Track process. The maturity levels "Working Draft" and "Working Group Note" represent the possible initial states of a technical report in the Recommendation Track process. The maturity levels "Recommendation", "Working Group Note", and "Rescinded Recommendation" represent the possible end states.
+The maturity level of a published technical report indicates its place in the Recommendation Track process.
 
 - First Public Working Draft
 
-Announcement: The Director must announce the first Working Draft publication to other W3C groups and to the public.
-
-Purpose: The publication of the First Public Working Draft is a signal to the community to begin reviewing the document. See section 4.1 of the W3C Patent Policy [PUB33] for information about the policy implications of the First Public Working Draft.
-
-Entrance criteria: The Chair must record the group's decision to request advancement. Since this is the first time that a document with this short name appears in the Technical Reports index, Director approval is required for the transition.
-
-Ongoing work: After publication of the First Public Working Draft, the Working Group generally revises the technical report (see the Working Group "Heartbeat" Requirement) in accordance with its charter.
-
-In order to make Working Drafts available to a wide audience early in their development, the requirements for publication of a Working Draft are limited to an agreement by a chartered Working Group to publish the technical report and satisfaction of the Team's Publication Rules [PUB31]. Consensus is not a prerequisite for approval to publish; the Working Group may request publication of a Working Draft even if it is unstable and does not meet all Working Group requirements.
-
-Working Groups should encourage early and wide review of the technical report, within and outside of W3C, especially from other Working Groups with dependencies on the technical report. Advisory Committee representatives should encourage review within their organizations as early as First Public Working Draft, i.e., before a Last Call announcement and well before a Call for Review of a Proposed Recommendation.
-
-The Working Group should be responsive to and facilitate ongoing review by addressing issues in a timely manner and clearly indicating changes between drafts (e.g., by providing "diffs" and summaries of substantive changes).
-
-Possible next steps:
-
-Forward: Last Call announcement, generally done after a series of Working Drafts.
-Otherwise: end work
+  The publication of the First Public Working Draft is a signal to the community to begin reviewing the document.
 
 - Working Draft (WD)
 
@@ -144,6 +127,7 @@ Otherwise: end work
   A Candidate Recommendation is a document that W3C believes has been widely reviewed and satisfies the Working Group's technical requirements. W3C publishes a Candidate Recommendation to gather implementation experience.
 
 - Proposed Recommendation (PR)
+
   A Proposed Recommendation is a mature technical report that, after wide review for technical soundness and implementability, W3C has sent to the W3C Advisory Committee for final endorsement.
 
 - W3C Recommendation (REC)
@@ -195,16 +179,22 @@ IndexedDB 和 Web SQL Database 都是本地数据库数据存储，Web SQL Datab
 ### 兼容性
 
 可以看到 index db2.0 基本都是支持的。
-![http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/index-db.png]
+![](http://blog-bed.oss-cn-beijing.aliyuncs.com/webapp/index-db.png)
 
 ### Indexed Database 特性
 
-- key/value 的存储方式：IndexedDB 和 localStorage 的存储方式很类似，都是通过一个 key 对应一个 value，而且 key 是唯一的方式进行存储的，但是 indexedDB 和 localStorage 有很不一样的一点，就是可以直接存储对象数组等，不需要想 localStorage 那样必须转为字符串。
-- 异步调用：IndexedDB 是使用异步调用的，当我们存储一个较大的数据时，不会因为写入数据慢而导致页面阻塞。
-- 支持事务：IndexedDB 支持事务，如果有用过 mysql 和 mongoDB 的人就很清楚了，能确保我们多个操作只要其中一步出现问题，可以整体回滚。
-- 同源限制：IndexedDB 和 localStorage 一样，都是有同源策略的问题，不能跨协议、端口、域名使用。
-- 支持二进制：IndexedDB 不但可以存储对象，字符串等，还可以存储二进制数据。
-- 储存空间：IndexedDB 存储空间相比 localStorage 要大得多。
+- key/value 的存储方式
+  IndexedDB 和 localStorage 的存储方式很类似，都是通过一个 key 对应一个 value，而且 key 是唯一的方式进行存储的，但是 indexedDB 和 localStorage 有很不一样的一点，就是可以直接存储对象数组等，不需要想 localStorage 那样必须转为字符串。
+- 异步调用
+  IndexedDB 是使用异步调用的，当我们存储一个较大的数据时，不会因为写入数据慢而导致页面阻塞。
+- 支持事务
+  IndexedDB 支持事务，如果有用过 mysql 和 mongoDB 的人就很清楚了，能确保我们多个操作只要其中一步出现问题，可以整体回滚。
+- 同源限制
+  IndexedDB 和 localStorage 一样，都是有同源策略的问题，不能跨协议、端口、域名使用。
+- 支持二进制
+  IndexedDB 不但可以存储对象，字符串等，还可以存储二进制数据。
+- 储存空间
+  IndexedDB 存储空间相比 localStorage 要大得多。
 
 ### Indexed Database 3.0 的修订历史
 
@@ -257,9 +247,7 @@ IndexedDB 和 Web SQL Database 都是本地数据库数据存储，Web SQL Datab
 
 ### Edge 团队在 PWA 上的进展
 
-This is Diego from the Microsoft Edge Team working on PWAs.
-
-桌面 PWA 具有大量可能的功能——响应式设计、操作系统主题支持、自定义标题栏、快捷方式、从应用程序共享、共享到应用程序、处理方案、链接、文件以及对文件系统本身的访问。还有徽章和推送通知，但它们已被很好地涵盖，不会包含在本次演讲中。
+桌面 PWA 具有大量可能的功能——响应式设计、操作系统主题支持、自定义标题栏、快捷方式、从应用程序共享、共享到应用程序、处理方案、链接、文件以及对文件系统本身的访问。还有徽章和推送通知。
 
 ### 什么是 PWA
 
@@ -396,7 +384,7 @@ service worker 主要有三个事件： install，activate 和 fetch。
 ```js
 //sw.js
 var CACHE_NAME = "v1";
-var urlsToCache = ["icons/logo-512.png"];
+var urlsToCache = ["/", "icons/logo-512.png"];
 
 self.addEventListener("install", function (event) {
   //Perform install steps
@@ -456,9 +444,7 @@ self.addEventListener("fetch", function (event) {
 目前 Windows 10 系统内置的 Microsoft Store 应用商店已经内置了很多 PWA 应用，当然还有其他很多 PWA 应用商店，如：
 [appsco](https://appsco.pe/)、[pwastart](https://appstore.pwastart.com/)。
 
-此外，通过 [PWABuilder](https://www.pwabuilder.com/)可以将 PWA 应用上传到 ios app store 或其他 PWA Builder process 上传到对应的 store。
-
-And today, I'm gonna share with you a demo that showcases how the features that we're working on allow your installed web app to integrate with the desktop operating system, be it Windows, Linux, or even Mac OS. So, the first thing that we need to know is how to acquire the PWA.
+此外，通过 [PWABuilder](https://www.pwabuilder.com/)可以将 PWA 应用上传到 ios app store 或其他 store。
 
 #### PWA 具有的功能
 
@@ -499,9 +485,30 @@ And today, I'm gonna share with you a demo that showcases how the features that 
 
 - file system access API
 
+  ```js
+  //desktop file access support (Edge, Chrome, Opera)
+  async function getNewFileHandle() {
+    const options = {
+      startIn: "pictures",
+      suggestedName: "custom PWA logo.svg",
+      types: [
+        {
+          description: "SVG Files",
+          accept: {
+            "image/svg+xml": [".svg"],
+          },
+        },
+      ],
+    };
+    const handle = await window.showSaveFilePicker(options);
+    return handle;
+  }
+  ```
+
 ### 参考文档
 
 - [pwa](https://www.w3.org/2021/10/TPAC/demos/pwa.html)
+- [pwinter](https://github.com/diekus/pwinter)
 - [Progressive_web_apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 - [progressive-web-apps](https://web.dev/progressive-web-apps/)
 - [code-21-big-stonking-post](https://weblog.200ok.com.au/2021/09/code-21-big-stonking-post.html)
@@ -513,6 +520,8 @@ And today, I'm gonna share with you a demo that showcases how the features that 
 - [讲讲 PWA](https://segmentfault.com/a/1190000012353473)
 - [pwa-book](https://lavas-project.github.io/pwa-book/)
 - [Manifest](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
-  https://web.dev/manifest-updates/
-  https://solidstudio.io/blog/pwa-refreshing-application
-  https://web.dev/learn/pwa/
+- [manifest-updates](https://web.dev/manifest-updates/)
+- [pwa-refreshing-application](https://solidstudio.io/blog/pwa-refreshing-application)
+- [learn-pwa](https://web.dev/learn/pwa/)
+- [firt.dev](https://firt.dev/)
+- [pwa-retrofit](https://github.com/craigbuckler/pwa-retrofit)
